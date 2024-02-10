@@ -7,12 +7,15 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
-    name: '',
+    first_name: '',
+    last_name:'',
+    phone:'',
     email: '',
     password: '',
     password_confirmation: '',
     terms: false,
 });
+
 
 const submit = () => {
     form.post(route('register'), {
@@ -26,21 +29,56 @@ const submit = () => {
         <Head title="Register" />
 
         <form @submit.prevent="submit">
+            <!-- fname -->
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="first_name" value="FirstName" />
 
                 <TextInput
-                    id="name"
+                    id="first_name"
                     type="text"
                     class="mt-1 block w-full"
-                    v-model="form.name"
+                    v-model="form.first_name"
                     required
                     autofocus
-                    autocomplete="name"
+                    autocomplete="first_name"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.first_name" />
             </div>
+
+            <!-- lname -->
+            <div class="mt-4">
+                <InputLabel for="last_name" value="LastName" />
+
+                <TextInput
+                    id="last_name"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.last_name"
+                    required
+
+                    autocomplete="last_name"
+                />
+
+                <InputError class="mt-2" :message="form.errors.lname" />
+            </div>
+            <!-- Phone -->
+            <div class="mt-4">
+                <InputLabel for="tel" value="Phone" />
+                <TextInput
+                    id="tel"
+                    type="tel"
+                    class="mt-1 block w-full"
+                    v-model="form.phone"
+                    required
+                    autocomplete="tel"
+                />
+
+                <InputError class="mt-2" :message="form.errors.tel" />
+            </div>
+
+
+            <!-- Email -->
 
             <div class="mt-4">
                 <InputLabel for="email" value="Email" />
@@ -53,10 +91,10 @@ const submit = () => {
                     required
                     autocomplete="username"
                 />
-
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
+            <!-- password -->
             <div class="mt-4">
                 <InputLabel for="password" value="Password" />
 
@@ -86,6 +124,7 @@ const submit = () => {
 
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
+
 
             <div class="flex items-center justify-end mt-4">
                 <Link

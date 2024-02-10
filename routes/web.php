@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FilmController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,6 +18,23 @@ use Inertia\Inertia;
 |
 */
 
+// Route::get('/home',function(){
+//     return view::render('homemuv');
+// });
+
+Route::get('/home', function () {
+    return view('homemuv');
+});
+
+Route::get('/home11', function () {
+    return view('components/home');
+});
+
+
+
+// Route::get('homemuv',
+// [FilmController::class, 'index']);
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -25,9 +44,18 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [FilmController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
+
+Route::get('/orderhistory', function () {
+    return Inertia::render('Orderhistory');
+})->middleware(['auth', 'verified'])->name('orderhistory');
+
+Route::get('/cart', function () {
+    return Inertia::render('Cart');
+})->middleware(['auth', 'verified'])->name('cart');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

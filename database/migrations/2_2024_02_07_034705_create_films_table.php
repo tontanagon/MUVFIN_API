@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id('film_id');
             $table->string('title',100);
             $table->unsignedBigInteger('category_id');
-            $table->float('price',2);
+            $table->unsignedBigInteger('price');
             $table->unsignedInteger('length');
-            $table->string('rating',15);
+            $table->float('rating',2,1);
             $table->string('actor');
-            $table->string('imgUrl');
+            $table->mediumText('imgUrl');
             $table->timestamps();
 
             $table->foreign('category_id')

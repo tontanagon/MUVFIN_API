@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\film;
+use App\Models\category;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class FilmController extends Controller
 {
@@ -17,6 +19,16 @@ class FilmController extends Controller
         //
     }
 
+    public function dashboard()
+    {
+        $films = film::all();
+        $cate = category::all();
+
+        return Inertia::render('Dashboard',[
+            'films' => $films,
+            'cate' => $cate
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *
